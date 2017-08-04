@@ -1,0 +1,32 @@
+{
+	"expo": {
+		"name": "flux-scrollable",
+		"description": "An empty new project",
+		"slug": "flux-scrollable",
+		"privacy": "public",
+		"sdkVersion": "19.0.0",
+		"android": {
+			"package": "com.anonsment.chat",
+			"config": {
+				"googleSignIn":{
+						"apiKey": "AIzaSyD5d-Y6MKS3wmxUOHvBTGhIMPOmZC9mvdc",
+						"certificateHash": "F6B135645BC1D38C2FF5CE2C7BC3E7C573CCA943"
+					}
+			}
+		},
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"primaryColor": "#cccccc",
+		"icon": "./assets/icons/app-icon.png",
+		"loading": {
+			"icon": "./assets/icons/loading-icon.png",
+			"hideExponentText": false
+		},
+		"packagerOpts": {
+			"assetExts": ["ttf", "mp4"]
+		},
+		"ios": {
+			"supportsTablet": true
+		}
+	}
+}
