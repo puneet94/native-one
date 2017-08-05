@@ -15,9 +15,11 @@ const SingleChatComponent = ({chat})=>{
 				<Text style={styles.userName}>
 					{chat.creator2.anonName}
 				</Text>
-				<Text style={styles.userStatus}>
-					{chat.lastMessage.message}
-				</Text>
+				<View style={styles.userStatus}>
+					{chat.lastMessage.type=="img"?<Image style={styles.chatMessagePicture} source={{uri:chat.lastMessage.message}} />:
+						<Text style={styles.userTextMessage}>{chat.lastMessage.message}</Text>
+					}
+				</View>
 				
 			</View>
 			<View style={styles.userMessageAlert}>
@@ -61,10 +63,17 @@ const styles = StyleSheet.create({
 	},
 
 	userStatus:{
+	
+	},
+	userTextMessage:{
 		fontSize: 14,
 		fontWeight: "400"
 	},
-	
+	chatMessagePicture:{
+		width: 200,
+		flex:1,
+		height: 50
+	},
 	userImage:{
 		flex:1,
 		height: 300,

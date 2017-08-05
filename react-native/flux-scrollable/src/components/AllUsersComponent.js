@@ -1,6 +1,6 @@
 "use strict";
 import React from "react";
-import { View, Text,Button,FlatList } from "react-native";
+import { View, Text,Button,FlatList,ActivityIndicator } from "react-native";
 import {connect} from 'react-redux';
 import {getAllUsers} from '../actions/users';
 import {Actions} from 'react-native-router-flux';
@@ -15,7 +15,7 @@ class AllUsersComponent extends React.Component {
 	}
     
 	componentWillMount=()=>{
-		console.log("users component");
+		
 		this.setState({
 			refreshing: true
 		});
@@ -27,9 +27,12 @@ class AllUsersComponent extends React.Component {
 	}
 	refreshUsers = ()=>{
 		this.setState({
-			refreshing: true
+			refreshing: true,
+			page: 1
+		},()=>{
+			this.props.getAllUsers(this.state.page);
 		});
-		this.props.getAllUsers(1);
+		
 		
 		this.setState({
 			refreshing: false
@@ -37,12 +40,23 @@ class AllUsersComponent extends React.Component {
 	}
 	loadMoreUsers = ()=>{
 		this.setState({
-			page: this.state.page+1
+			page: this.state.page+1,
+			refreshing: true
 		},()=>{
 			this.props.getAllUsers(this.state.page);
-		})
+		});
+		this.setState({
+			refreshing: false
+		});
 		
 	}
+	renderFooter () {
+        return (<ActivityIndicator
+        				animating={this.state.refreshing}
+        				style={ {height: 80}}
+        				size="large" color="white"
+      			/>);
+    }
 	render=()=>{
 		
 		if(this.props.all){
@@ -55,14 +69,15 @@ class AllUsersComponent extends React.Component {
 					renderItem={({item})=><SingleUserComponent user= {item} />}
 					keyExtractor={(item)=>item._id}
 					onEndReached={this.loadMoreUsers}
-					onEndReachedThreshold={0.1}
+					onEndReachedThreshold={10}
+					renderFooter={this.renderFooter}
 					onRefresh={this.refreshUsers}
 					refreshing={this.state.refreshing}
 				/>
-					
+				
 				
 			</View>
-				)
+				);
 		}
 		return(
 			<Text>Not there</Text>

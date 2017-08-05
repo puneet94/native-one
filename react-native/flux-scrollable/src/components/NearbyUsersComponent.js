@@ -55,8 +55,6 @@ class NearbyUsersComponent extends React.Component {
 		});
 	}
 	render=()=>{
-		console.log("locationsssssssss");
-		console.log(this.props.location);
 		if(this.props.nearby && !this.props.location_error){
 				return (
 					<View style={{flex:1}}>

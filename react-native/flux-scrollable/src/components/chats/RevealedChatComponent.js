@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
 	userMessageAlert:{
 		flex: 1,
 		alignItems: "center",
+		justifyContent: "center"
 	}
 });
 

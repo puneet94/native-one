@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {ALL_CHATS_RECEIVED,REVEALED_CHATS_RECEIVED,GROUP_CHATS_RECEIVED,URL} from './constants';
+import {ALL_CHATS_RECEIVED,REVEALED_CHATS_RECEIVED,GROUPS_CHATS_RECEIVED,URL} from './constants';
 
 export const getAllChats = (page) => {
 	return async (dispatch,getState)=>{
@@ -29,8 +29,7 @@ export const getRevealedChats = (page)=>{
 			limit: 10,
 			page: page
 		}});
-		console.log("revealed chats");
-		console.log(response.data.docs);
+		
 		dispatch({type:REVEALED_CHATS_RECEIVED,payload:{data:response.data.docs,page:page,pages:response.data.pages}});
 		
 	};
@@ -47,7 +46,8 @@ export const getGroupChats = (page)=>{
 			limit: 10,
 			page: page
 		}});
-		dispatch({type:GROUP_CHATS_RECEIVED,payload:{data:response.data.docs,page:page,pages:response.data.pages}});
+		
+		dispatch({type:GROUPS_CHATS_RECEIVED,payload:{data:response.data.docs,page:page,pages:response.data.pages}});
 		
 	};
 }

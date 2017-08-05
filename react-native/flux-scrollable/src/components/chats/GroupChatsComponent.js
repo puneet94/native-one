@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {getGroupChats} from '../../actions/chats';
 import {Actions} from 'react-native-router-flux';
 
-import SingleChatComponent from './SingleChatComponent';
+import GroupChatComponent from './GroupChatComponent';
 
 class GroupChatsComponent extends Component {
 	constructor(props){
@@ -45,15 +45,16 @@ class GroupChatsComponent extends Component {
 		
 	}
 	render=()=>{
-		
-		if(this.props.all){
+		console.log("group chats");
+		console.log(this.props.groups.chats);
+		if(this.props.groups){
 				return (
 					<View style={{
 				flex:1
 			}}>
 				<FlatList
-					data={this.props.all.chats}
-					renderItem={({item})=><GroupChatComponent chat= {item} />}
+					data={this.props.groups.chats}
+					renderItem={({item})=><GroupChatComponent group= {item} />}
 					keyExtractor={(item)=>item._id}
 					onEndReached={this.loadMoreChats}
 					onEndReachedThreshold={0.1}
